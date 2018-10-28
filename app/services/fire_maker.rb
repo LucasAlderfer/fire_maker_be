@@ -1,8 +1,9 @@
 class FireMaker
 
   def self.make_fires
-    response = Faraday.get('https://firms.modaps.eosdis.nasa.gov/data/active_fire/c6/csv/MODIS_C6_USA_contiguous_and_Hawaii_24h.csv')
-    csv_text = response.body
+    # response = Faraday.get('https://firms.modaps.eosdis.nasa.gov/data/active_fire/c6/csv/MODIS_C6_USA_contiguous_and_Hawaii_24h.csv')
+    # csv_text = response.body
+    csv_text = File.open('../app/db/MODIS_C6_USA_contiguous_and_Hawaii_24h.csv')
     CSV.parse(csv_text, headers: true, header_converters: :symbol) do |row|
       fire = {
         latitude: row[:latitude],
